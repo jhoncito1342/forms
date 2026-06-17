@@ -13,27 +13,30 @@
 
 <style>
   :root{
-    /* --- Paleta: pino del Altiplano + dorado del sol andino --- */
-    --pine:        #163a2a;   /* verde profundo institucional */
-    --pine-2:      #1f4d38;
-    --moss:        #2f5a45;   /* verde medio, acciones */
-    --moss-deep:   #173626;
-    --leaf:        #8bbd6f;   /* verde claro, detalles */
-    --gold:        #e8a52a;   /* dorado: energía / CTA principal */
-    --gold-deep:   #c9871a;
-    --gold-soft:   rgba(232,165,42,0.16);
+    /* --- Paleta azul: lago Titicaca + cielo del Altiplano --- */
+    --navy:        #0e2c4c;   /* azul profundo: hero / pie */
+    --navy-2:      #143a61;
+    --blue:        #1e5f93;   /* azul medio */
+    --blue-deep:   #14375a;   /* títulos */
+    --azure:       #2f93d6;   /* acento brillante / acción principal */
+    --azure-deep:  #2479b4;
+    --azure-soft:  rgba(47,147,214,0.14);
+    --teal:        #0f8a8c;   /* botón WhatsApp (verde azulado) */
+    --teal-deep:   #0b6e70;
+    --teal-soft:   rgba(15,138,140,0.10);
+    --sky:         #9fd3f2;   /* detalle claro sobre azul */
 
-    --paper:       #f5f1e6;   /* fondo */
-    --paper-2:     #efe9d9;   /* bandas alternas */
-    --card:        #fffdf6;   /* tarjetas */
-    --ink:         #1a221d;   /* texto principal */
-    --ink-2:       rgba(26,34,29,0.66);
-    --ink-3:       rgba(26,34,29,0.42);
-    --line:        rgba(26,34,29,0.12);
-    --line-2:      rgba(26,34,29,0.2);
+    --paper:       #eef3f8;   /* fondo */
+    --paper-2:     #e3ecf3;   /* bandas alternas */
+    --card:        #ffffff;   /* tarjetas */
+    --ink:         #15212e;   /* texto principal */
+    --ink-2:       rgba(21,33,46,0.66);
+    --ink-3:       rgba(21,33,46,0.42);
+    --line:        rgba(21,33,46,0.10);
+    --line-2:      rgba(21,33,46,0.18);
 
-    --on-pine:     #f3efe2;   /* texto sobre verde */
-    --on-pine-2:   rgba(243,239,226,0.74);
+    --on-navy:     #e9f1fa;
+    --on-navy-2:   rgba(233,241,250,0.74);
 
     --serif: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
     --sans:  'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -47,14 +50,9 @@
   html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
 
   body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:var(--sans);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
-    overflow-x:hidden;
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); line-height:1.6;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:hidden;
   }
 
   .shell{ max-width:var(--maxw); margin:0 auto; padding:0 22px; }
@@ -62,209 +60,121 @@
   /* ============ BARRA SUPERIOR ============ */
   .topbar{
     position:sticky; top:0; z-index:50;
-    background:rgba(245,241,230,0.86);
+    background:rgba(238,243,248,0.86);
     backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
-  .topbar-inner{
-    max-width:var(--maxw); margin:0 auto; padding:11px 22px;
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
-  }
+  .topbar-inner{ max-width:var(--maxw); margin:0 auto; padding:11px 22px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
   .brand{ display:flex; align-items:center; gap:10px; min-width:0; }
   .brand img{ height:34px; width:auto; display:block; }
-  /* Marca textual (puedes quitarla si tu logo ya incluye el nombre) */
-  .brand-word{
-    font-family:var(--serif); font-weight:600; font-size:16.5px;
-    color:var(--pine); letter-spacing:-0.01em; line-height:1.05; white-space:nowrap;
-  }
-  .brand-word b{ color:var(--gold-deep); font-weight:600; }
-  .tag-2026{
-    font-family:var(--sans); font-size:11.5px; font-weight:700; letter-spacing:0.1em;
-    text-transform:uppercase; color:var(--pine);
-    border:1.5px solid var(--gold); background:var(--gold-soft);
-    padding:5px 11px; border-radius:999px; white-space:nowrap;
-  }
+  /* Marca textual (quítala si tu logo ya incluye el nombre) */
+  .brand-word{ font-family:var(--serif); font-weight:600; font-size:16.5px; color:var(--navy); letter-spacing:-0.01em; line-height:1.05; white-space:nowrap; }
+  .brand-word b{ color:var(--azure-deep); font-weight:600; }
+  .tag-2026{ font-family:var(--sans); font-size:11.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--blue-deep); border:1.5px solid var(--azure); background:var(--azure-soft); padding:5px 11px; border-radius:999px; white-space:nowrap; }
 
   /* ============ HERO ============ */
   .hero{
-    position:relative; overflow:hidden;
+    position:relative; overflow:hidden; color:var(--on-navy); padding:64px 0 56px;
     background:
-      radial-gradient(120% 90% at 85% -10%, rgba(139,189,111,0.16), transparent 60%),
-      linear-gradient(165deg, var(--pine) 0%, var(--moss-deep) 70%, #102a1e 100%);
-    color:var(--on-pine);
-    padding:64px 0 56px;
+      radial-gradient(120% 90% at 85% -10%, rgba(159,211,242,0.18), transparent 60%),
+      linear-gradient(165deg, var(--navy) 0%, #0c243f 70%, #081a30 100%);
   }
-  .contours{
-    position:absolute; inset:-10% -10% auto -10%; width:120%; height:130%;
-    opacity:0.12; pointer-events:none;
-  }
-  .contours path{ fill:none; stroke:var(--gold); stroke-width:1.4; }
+  .ripples{ position:absolute; inset:-10% -10% auto -10%; width:120%; height:130%; opacity:0.16; pointer-events:none; }
+  .ripples path{ fill:none; stroke:var(--sky); stroke-width:1.4; }
   .hero-inner{ position:relative; z-index:2; max-width:var(--maxw); margin:0 auto; padding:0 22px; }
 
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:9px;
-    font-family:var(--sans); font-size:12px; font-weight:700;
-    letter-spacing:0.16em; text-transform:uppercase; color:var(--leaf);
-    margin:0 0 20px;
-  }
-  .eyebrow::before{ content:""; width:22px; height:1.5px; background:var(--gold); display:inline-block; }
+  .eyebrow{ display:inline-flex; align-items:center; gap:9px; font-family:var(--sans); font-size:12px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--sky); margin:0 0 20px; }
+  .eyebrow::before{ content:""; width:22px; height:1.5px; background:var(--azure); display:inline-block; }
 
-  .hero h1{
-    font-family:var(--serif);
-    font-weight:600;
-    font-size:clamp(38px, 9.5vw, 60px);
-    line-height:1.02; letter-spacing:-0.02em;
-    margin:0 0 18px;
-  }
-  .hero h1 em{ font-style:italic; color:var(--gold); font-weight:500; }
-
-  .hero-lead{
-    font-size:clamp(15.5px,4.2vw,18px); line-height:1.55; color:var(--on-pine-2);
-    max-width:520px; margin:0 0 32px;
-  }
+  .hero h1{ font-family:var(--serif); font-weight:600; font-size:clamp(38px, 9.5vw, 60px); line-height:1.02; letter-spacing:-0.02em; margin:0 0 18px; }
+  .hero h1 em{ font-style:italic; color:var(--sky); font-weight:500; }
+  .hero-lead{ font-size:clamp(15.5px,4.2vw,18px); line-height:1.55; color:var(--on-navy-2); max-width:520px; margin:0 0 32px; }
 
   .hero-cta{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
-  .btn{
-    display:inline-flex; align-items:center; justify-content:center; gap:9px;
-    font-family:var(--sans); font-weight:700; font-size:15px;
-    padding:14px 24px; border-radius:11px; border:none; cursor:pointer;
-    text-decoration:none; transition:transform .15s ease, background .2s ease, box-shadow .2s ease;
-  }
-  .btn-gold{ background:var(--gold); color:var(--ink); box-shadow:0 8px 22px -10px rgba(232,165,42,0.7); }
-  .btn-gold:hover{ background:#f0b03f; transform:translateY(-2px); }
-  .btn-ghost{ background:transparent; color:var(--on-pine); border:1.5px solid rgba(243,239,226,0.4); font-weight:600; }
-  .btn-ghost:hover{ border-color:var(--on-pine); transform:translateY(-2px); }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:9px; font-family:var(--sans); font-weight:700; font-size:15px; padding:14px 24px; border-radius:11px; border:none; cursor:pointer; text-decoration:none; transition:transform .15s ease, background .2s ease, box-shadow .2s ease; }
+  .btn-primary{ background:var(--azure); color:#fff; box-shadow:0 8px 22px -10px rgba(47,147,214,0.85); }
+  .btn-primary:hover{ background:#3aa0e2; transform:translateY(-2px); }
+  .btn-ghost{ background:transparent; color:var(--on-navy); border:1.5px solid rgba(233,241,250,0.4); font-weight:600; }
+  .btn-ghost:hover{ border-color:var(--on-navy); transform:translateY(-2px); }
 
-  /* Imagen banner enmarcada dentro del hero */
-  .hero-banner{ margin-top:40px; position:relative; }
-  .hero-banner img{
-    width:100%; height:auto; max-height:300px; object-fit:cover; display:block;
-    border-radius:14px; border:1px solid rgba(243,239,226,0.18);
-    box-shadow:0 24px 50px -24px rgba(0,0,0,0.55);
-  }
-  .hero-banner::after{
-    content:""; position:absolute; right:-8px; bottom:-8px; width:64px; height:64px;
-    border-right:3px solid var(--gold); border-bottom:3px solid var(--gold);
-    border-bottom-right-radius:14px;
-  }
+  /* ============ CARRUSEL ============ */
+  .carousel{ position:relative; margin-top:40px; border-radius:16px; overflow:hidden; border:1px solid rgba(233,241,250,0.18); box-shadow:0 24px 50px -24px rgba(0,0,0,0.55); }
+  .carousel-track{ display:flex; transition:transform .55s cubic-bezier(.4,0,.2,1); }
+  .slide{ position:relative; flex:0 0 100%; height:clamp(210px,56vw,330px); background:linear-gradient(135deg,var(--navy-2),var(--blue)); }
+  .slide img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+  .slide-cap{ position:absolute; z-index:2; top:14px; left:14px; max-width:82%; background:rgba(8,22,38,0.55); backdrop-filter:blur(4px); color:#fff; font-family:var(--sans); font-weight:600; font-size:12.5px; padding:7px 13px; border-radius:999px; }
+  .car-arrow{ position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:50%; border:none; background:rgba(8,22,38,0.45); color:#fff; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(3px); z-index:3; transition:background .2s ease; }
+  .car-arrow:hover{ background:rgba(8,22,38,0.72); }
+  .car-arrow.prev{ left:12px; } .car-arrow.next{ right:12px; }
+  .car-dots{ position:absolute; bottom:13px; left:0; right:0; z-index:3; display:flex; gap:7px; justify-content:center; }
+  .car-dot{ width:8px; height:8px; border-radius:999px; border:none; background:rgba(255,255,255,0.55); cursor:pointer; padding:0; transition:width .25s ease, background .25s ease; }
+  .car-dot.on{ width:22px; background:var(--azure); }
 
   /* ============ SECCIONES ============ */
   .section{ padding:58px 0; }
   .section.tint{ background:var(--paper-2); }
-  .sec-eyebrow{
-    font-family:var(--sans); font-size:12px; font-weight:700; letter-spacing:0.16em;
-    text-transform:uppercase; color:var(--moss); margin:0 0 14px;
-    display:flex; align-items:center; gap:9px;
-  }
-  .sec-eyebrow::before{ content:""; width:22px; height:1.5px; background:var(--gold); display:inline-block; }
+  .sec-eyebrow{ font-family:var(--sans); font-size:12px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--blue); margin:0 0 14px; display:flex; align-items:center; gap:9px; }
+  .sec-eyebrow::before{ content:""; width:22px; height:1.5px; background:var(--azure); display:inline-block; }
 
-  .lede{
-    font-family:var(--serif); font-weight:400;
-    font-size:clamp(21px,5.5vw,28px); line-height:1.32; color:var(--ink);
-    letter-spacing:-0.01em; margin:0;
-  }
-  .lede strong{ font-weight:600; color:var(--pine); }
+  .lede{ font-family:var(--serif); font-weight:400; font-size:clamp(21px,5.5vw,28px); line-height:1.32; color:var(--ink); letter-spacing:-0.01em; margin:0; }
+  .lede strong{ font-weight:600; color:var(--blue-deep); }
   .prose{ font-size:15.5px; color:var(--ink-2); margin:18px 0 0; max-width:560px; }
-
-  .propose-img{
-    width:100%; height:auto; max-height:260px; object-fit:cover;
-    border-radius:14px; display:block; margin-top:28px; border:1px solid var(--line);
-  }
+  .propose-img{ width:100%; height:auto; max-height:260px; object-fit:cover; border-radius:14px; display:block; margin-top:28px; border:1px solid var(--line); }
 
   /* ---- Ejes / propuestas ---- */
   .pillars{ display:grid; gap:14px; margin-top:30px; }
   @media(min-width:560px){ .pillars{ grid-template-columns:1fr 1fr; } }
-  .pillar{
-    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    padding:22px 22px 20px; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-  }
-  .pillar:hover{ transform:translateY(-3px); box-shadow:0 16px 34px -22px rgba(22,58,42,0.4); border-color:var(--gold); }
-  .pillar-ic{
-    width:42px; height:42px; border-radius:11px; background:var(--pine);
-    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
-  }
-  .pillar-ic svg{ width:21px; height:21px; stroke:var(--gold); fill:none; stroke-width:1.8; }
-  .pillar h3{ font-family:var(--serif); font-weight:600; font-size:18px; color:var(--moss-deep); margin:0 0 6px; letter-spacing:-0.01em; }
+  .pillar{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px 22px 20px; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .pillar:hover{ transform:translateY(-3px); box-shadow:0 16px 34px -22px rgba(14,44,76,0.45); border-color:var(--azure); }
+  .pillar-ic{ width:42px; height:42px; border-radius:11px; background:var(--navy); display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+  .pillar-ic svg{ width:21px; height:21px; stroke:var(--sky); fill:none; stroke-width:1.8; }
+  .pillar h3{ font-family:var(--serif); font-weight:600; font-size:18px; color:var(--blue-deep); margin:0 0 6px; letter-spacing:-0.01em; }
   .pillar p{ font-size:13.8px; color:var(--ink-2); margin:0; line-height:1.55; }
 
   /* ============ INSCRIPCIÓN (2 pasos) ============ */
   .signup{ padding:14px 0 56px; scroll-margin-top:78px; }
   .signup-head{ text-align:center; margin-bottom:8px; }
-  .signup-head h2{
-    font-family:var(--serif); font-weight:600; font-size:clamp(27px,7vw,36px);
-    color:var(--moss-deep); letter-spacing:-0.01em; margin:6px 0 12px;
-  }
+  .signup-head h2{ font-family:var(--serif); font-weight:600; font-size:clamp(27px,7vw,36px); color:var(--blue-deep); letter-spacing:-0.01em; margin:6px 0 12px; }
   .signup-head .prose{ margin:0 auto; }
-  .perks{
-    list-style:none; padding:0; margin:22px auto 4px; max-width:430px;
-    display:grid; gap:10px;
-  }
+  .perks{ list-style:none; padding:0; margin:22px auto 4px; max-width:430px; display:grid; gap:10px; }
   .perks li{ display:flex; gap:11px; align-items:flex-start; font-size:14px; color:var(--ink-2); }
-  .perks svg{ width:19px; height:19px; flex-shrink:0; margin-top:1px; stroke:var(--gold-deep); fill:none; stroke-width:2; }
+  .perks svg{ width:19px; height:19px; flex-shrink:0; margin-top:1px; stroke:var(--azure-deep); fill:none; stroke-width:2; }
 
-  /* Espina de progreso (elemento distintivo) */
+  /* Espina de progreso */
   .path{ position:relative; padding-left:40px; margin-top:36px; }
-  .path::before{
-    content:""; position:absolute; left:15px; top:18px; bottom:18px; width:2px;
-    background:var(--line-2);
-  }
-  .path-fill{
-    content:""; position:absolute; left:15px; top:18px; width:2px; height:0;
-    background:linear-gradient(var(--gold), var(--moss)); transition:height .5s ease; z-index:1;
-  }
+  .path::before{ content:""; position:absolute; left:15px; top:18px; bottom:18px; width:2px; background:var(--line-2); }
+  .path-fill{ position:absolute; left:15px; top:18px; width:2px; height:0; background:linear-gradient(var(--azure), var(--teal)); transition:height .5s ease; z-index:1; }
   .path.step2 .path-fill{ height:calc(50% - 18px); }
 
   .gate{ position:relative; margin-bottom:22px; }
-  .gate-dot{
-    position:absolute; left:-40px; top:4px; width:32px; height:32px; border-radius:50%;
-    background:var(--paper); border:2px solid var(--ink-3); z-index:2;
-    display:flex; align-items:center; justify-content:center;
-    font-family:var(--sans); font-weight:700; font-size:14px; color:var(--ink-3);
-    transition:all .35s ease;
-  }
-  .gate.active .gate-dot{ border-color:var(--gold); color:var(--gold-deep); box-shadow:0 0 0 6px var(--gold-soft); }
-  .gate.done .gate-dot{ background:var(--pine); border-color:var(--pine); color:#fff; }
+  .gate-dot{ position:absolute; left:-40px; top:4px; width:32px; height:32px; border-radius:50%; background:var(--paper); border:2px solid var(--ink-3); z-index:2; display:flex; align-items:center; justify-content:center; font-family:var(--sans); font-weight:700; font-size:14px; color:var(--ink-3); transition:all .35s ease; }
+  .gate.active .gate-dot{ border-color:var(--azure); color:var(--azure-deep); box-shadow:0 0 0 6px var(--azure-soft); }
+  .gate.done .gate-dot{ background:var(--teal); border-color:var(--teal); color:#fff; }
   .gate.done .gate-dot .num{ display:none; }
   .gate-dot .check{ display:none; width:16px; height:16px; stroke:#fff; fill:none; stroke-width:2.4; }
   .gate.done .gate-dot .check{ display:block; }
 
-  .card-step{
-    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    padding:24px 22px 22px;
-    box-shadow:0 1px 0 rgba(22,58,42,0.03);
-    transition:opacity .35s ease, transform .35s ease;
-  }
+  .card-step{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px 22px 22px; box-shadow:0 1px 0 rgba(14,44,76,0.03); transition:opacity .35s ease, transform .35s ease; }
   .card-img{ width:100%; height:auto; border-radius:var(--radius-sm); display:block; margin-bottom:18px; }
-  .card-step h2{ font-family:var(--serif); font-weight:600; font-size:20px; color:var(--moss-deep); margin:0 0 7px; letter-spacing:-0.01em; }
+  .card-step h2{ font-family:var(--serif); font-weight:600; font-size:20px; color:var(--blue-deep); margin:0 0 7px; letter-spacing:-0.01em; }
   .card-step .desc{ font-size:14px; color:var(--ink-2); margin:0 0 18px; line-height:1.55; }
 
-  .btn-wa{
-    display:inline-flex; align-items:center; gap:10px;
-    background:var(--moss); color:#fff; font-family:var(--sans); font-weight:700; font-size:14.5px;
-    padding:13px 22px; border-radius:11px; text-decoration:none; border:none; cursor:pointer;
-    transition:background .2s ease, transform .15s ease;
-  }
-  .btn-wa:hover{ background:var(--moss-deep); transform:translateY(-1px); }
+  .btn-wa{ display:inline-flex; align-items:center; justify-content:center; gap:10px; background:var(--teal); color:#fff; font-family:var(--sans); font-weight:700; font-size:14.5px; padding:13px 22px; border-radius:11px; text-decoration:none; border:none; cursor:pointer; transition:background .2s ease, transform .15s ease; }
+  .btn-wa:hover{ background:var(--teal-deep); transform:translateY(-1px); }
   .btn-wa svg{ width:19px; height:19px; flex-shrink:0; }
+  .mini-note{ font-size:12.5px; color:var(--ink-3); margin:11px 0 0; display:flex; align-items:center; gap:6px; }
+  .mini-note svg{ width:14px; height:14px; stroke:var(--ink-3); fill:none; stroke-width:2; flex-shrink:0; }
 
-  .confirm{
-    margin-top:18px; display:flex; align-items:flex-start; gap:11px;
-    font-size:13.8px; color:var(--ink-2); line-height:1.5;
-    background:var(--paper-2); border:1px solid var(--line); border-radius:11px; padding:13px 14px;
-  }
-  .confirm input{ margin-top:2px; width:18px; height:18px; accent-color:var(--moss); flex-shrink:0; }
-  .confirm label{ margin:0; cursor:pointer; font-weight:500; }
-
-  .hint{ margin-top:12px; font-size:13px; color:var(--gold-deep); font-weight:600; display:none; }
-  .hint.show{ display:block; }
+  /* Aviso de "ya te uniste" */
+  .joined-note{ display:flex; gap:12px; align-items:center; background:var(--teal-soft); border:1px solid var(--teal); border-radius:12px; padding:14px 16px; }
+  .joined-note svg{ width:24px; height:24px; stroke:var(--teal-deep); fill:none; stroke-width:2.4; flex-shrink:0; }
+  .joined-note strong{ color:var(--blue-deep); font-size:14.5px; }
+  .link-reopen{ background:none; border:none; color:var(--azure-deep); font-family:var(--sans); font-size:13px; font-weight:600; cursor:pointer; padding:0; text-decoration:underline; }
 
   /* Paso 2 bloqueado */
   #formGate{ opacity:.5; pointer-events:none; transform:translateY(3px); }
   #formGate.unlocked{ opacity:1; pointer-events:auto; transform:none; }
-  .lock-banner{
-    display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-3);
-    background:var(--paper-2); border:1px dashed var(--line-2); border-radius:10px; padding:10px 13px; margin-bottom:18px;
-  }
+  .lock-banner{ display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-3); background:var(--paper-2); border:1px dashed var(--line-2); border-radius:10px; padding:10px 13px; margin-bottom:18px; }
   .lock-banner svg{ width:15px; height:15px; flex-shrink:0; }
   #formGate.unlocked .lock-banner{ display:none; }
 
@@ -272,77 +182,65 @@
   .field{ margin-bottom:15px; }
   .field-row{ display:grid; gap:15px; }
   @media(min-width:480px){ .field-row{ grid-template-columns:1fr 1fr; } }
+  label.lbl{ display:block; font-family:var(--sans); font-size:12.5px; font-weight:700; letter-spacing:0.02em; color:var(--blue-deep); margin:0 0 6px; }
+  .field input, .field select{ width:100%; padding:12px 13px; border:1px solid var(--line-2); border-radius:10px; font-family:var(--sans); font-size:15px; background:#fff; color:var(--ink); transition:border-color .18s ease, box-shadow .18s ease; }
+  .field select{ appearance:none; -webkit-appearance:none; cursor:pointer;
+    background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2315212e' stroke-width='2.4' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 13px center; padding-right:38px; }
+  .field input:focus, .field select:focus{ outline:none; border-color:var(--azure); box-shadow:0 0 0 3px var(--azure-soft); }
 
-  label.lbl{
-    display:block; font-family:var(--sans); font-size:12.5px; font-weight:700;
-    letter-spacing:0.02em; color:var(--moss-deep); margin:0 0 6px;
-  }
-  .field input, .field select{
-    width:100%; padding:12px 13px; border:1px solid var(--line-2); border-radius:10px;
-    font-family:var(--sans); font-size:15px; background:#fff; color:var(--ink);
-    transition:border-color .18s ease, box-shadow .18s ease;
-  }
-  .field select{
-    appearance:none; -webkit-appearance:none; cursor:pointer;
-    background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231a221d' stroke-width='2.4' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-    background-repeat:no-repeat; background-position:right 13px center; padding-right:38px;
-  }
-  .field input:focus, .field select:focus{
-    outline:none; border-color:var(--moss); box-shadow:0 0 0 3px rgba(47,90,69,0.14);
-  }
-  .field .help{ font-size:12px; color:var(--ink-3); margin:6px 0 0; }
-
-  .submit-btn{
-    width:100%; background:var(--gold); color:var(--ink); border:none;
-    padding:15px; border-radius:11px; font-family:var(--sans); font-weight:700; font-size:15.5px;
-    cursor:pointer; margin-top:8px; box-shadow:0 10px 24px -12px rgba(232,165,42,0.75);
-    transition:background .2s ease, transform .15s ease;
-  }
-  .submit-btn:hover{ background:#f0b03f; transform:translateY(-2px); }
+  .submit-btn{ width:100%; background:var(--azure); color:#fff; border:none; padding:15px; border-radius:11px; font-family:var(--sans); font-weight:700; font-size:15.5px; cursor:pointer; margin-top:8px; box-shadow:0 10px 24px -12px rgba(47,147,214,0.85); transition:background .2s ease, transform .15s ease; }
+  .submit-btn:hover{ background:#3aa0e2; transform:translateY(-2px); }
   .submit-btn:disabled{ background:var(--ink-3); color:#fff; cursor:not-allowed; transform:none; box-shadow:none; }
-
   .privacy{ font-size:11.5px; color:var(--ink-3); text-align:center; margin:13px 0 0; line-height:1.5; }
-
   .status{ margin-top:13px; font-size:14px; text-align:center; display:none; font-weight:600; }
   .status.show{ display:block; }
-  .status.ok{ color:var(--moss-deep); }
-  .status.err{ color:var(--gold-deep); }
+  .status.ok{ color:var(--teal-deep); }
+  .status.err{ color:#c0532a; }
 
   /* Pantalla de éxito */
   .success{ display:none; text-align:center; padding:64px 0; }
   .success.show{ display:block; }
-  .success-mark{
-    width:78px; height:78px; border-radius:50%; margin:0 auto 22px;
-    background:var(--gold-soft); border:2px solid var(--gold);
-    display:flex; align-items:center; justify-content:center;
-  }
-  .success-mark svg{ width:38px; height:38px; stroke:var(--moss); fill:none; stroke-width:1.6; }
-  .success h2{ font-family:var(--serif); font-weight:600; color:var(--moss-deep); font-size:30px; margin:0 0 10px; letter-spacing:-0.01em; }
+  .success-mark{ width:78px; height:78px; border-radius:50%; margin:0 auto 22px; background:var(--azure-soft); border:2px solid var(--azure); display:flex; align-items:center; justify-content:center; }
+  .success-mark svg{ width:38px; height:38px; stroke:var(--teal); fill:none; stroke-width:1.6; }
+  .success h2{ font-family:var(--serif); font-weight:600; color:var(--blue-deep); font-size:30px; margin:0 0 10px; letter-spacing:-0.01em; }
   .success p{ color:var(--ink-2); font-size:15px; max-width:400px; margin:0 auto; }
 
+  /* ============ MODAL WHATSAPP (misma ventana) ============ */
+  .modal-backdrop{ position:fixed; inset:0; z-index:100; background:rgba(8,22,38,0.62); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; padding:20px; }
+  .modal-backdrop[hidden]{ display:none; }
+  .modal{ background:var(--card); border-radius:18px; max-width:430px; width:100%; padding:30px 26px 26px; position:relative; text-align:center; box-shadow:0 30px 70px -20px rgba(8,22,38,0.65); animation:pop .25s ease; }
+  @keyframes pop{ from{ transform:translateY(12px) scale(.98); opacity:0; } to{ transform:none; opacity:1; } }
+  .modal-close{ position:absolute; top:12px; right:12px; width:34px; height:34px; border:none; background:var(--paper-2); border-radius:9px; font-size:19px; line-height:1; cursor:pointer; color:var(--ink-2); }
+  .modal-close:hover{ background:var(--line-2); }
+  .modal-ic{ width:58px; height:58px; border-radius:50%; background:var(--teal); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
+  .modal-ic svg{ width:30px; height:30px; fill:#fff; }
+  .modal h3{ font-family:var(--serif); font-weight:600; font-size:23px; color:var(--blue-deep); margin:0 0 8px; letter-spacing:-0.01em; }
+  .modal p{ font-size:14px; color:var(--ink-2); margin:0 0 18px; line-height:1.55; }
+  .modal-confirm{ border-top:1px solid var(--line); padding-top:18px; margin-top:4px; }
+  .mc-q{ font-weight:700; color:var(--ink); font-size:14.5px; margin:0 0 12px !important; }
+  .mc-note{ font-size:12px; color:var(--ink-3); margin:12px 0 0 !important; }
+  .btn-azure{ width:100%; background:var(--azure); color:#fff; border:none; padding:14px; border-radius:11px; font-family:var(--sans); font-weight:700; font-size:15px; cursor:pointer; transition:background .2s ease, transform .15s ease; }
+  .btn-azure:hover:not(:disabled){ background:#3aa0e2; transform:translateY(-1px); }
+  .btn-azure:disabled{ background:var(--ink-3); cursor:not-allowed; }
+
   /* ============ PIE ============ */
-  .footer{ background:var(--pine); color:var(--on-pine); padding:46px 0 38px; }
+  .footer{ background:var(--navy); color:var(--on-navy); padding:46px 0 38px; }
   .footer-inner{ max-width:var(--maxw); margin:0 auto; padding:0 22px; }
   .footer h3{ font-family:var(--serif); font-weight:600; font-size:24px; margin:0 0 6px; letter-spacing:-0.01em; }
-  .footer h3 span{ color:var(--gold); }
-  .footer .f-sub{ font-size:14px; color:var(--on-pine-2); margin:0 0 22px; }
+  .footer h3 span{ color:var(--sky); }
+  .footer .f-sub{ font-size:14px; color:var(--on-navy-2); margin:0 0 22px; }
   .footer-social{ display:flex; gap:10px; margin:0 0 22px; }
-  .footer-social a{
-    width:40px; height:40px; border-radius:10px; border:1px solid rgba(243,239,226,0.22);
-    display:flex; align-items:center; justify-content:center; color:var(--on-pine);
-    transition:background .2s ease, border-color .2s ease;
-  }
-  .footer-social a:hover{ background:rgba(243,239,226,0.1); border-color:var(--on-pine); }
+  .footer-social a{ width:40px; height:40px; border-radius:10px; border:1px solid rgba(233,241,250,0.22); display:flex; align-items:center; justify-content:center; color:var(--on-navy); transition:background .2s ease, border-color .2s ease; }
+  .footer-social a:hover{ background:rgba(233,241,250,0.1); border-color:var(--on-navy); }
   .footer-social svg{ width:18px; height:18px; fill:currentColor; }
-  .footer .fine{ font-size:12px; color:var(--on-pine-2); border-top:1px solid rgba(243,239,226,0.16); padding-top:18px; line-height:1.6; }
+  .footer .fine{ font-size:12px; color:var(--on-navy-2); border-top:1px solid rgba(233,241,250,0.16); padding-top:18px; line-height:1.6; }
 
   /* ============ Reveal al hacer scroll ============ */
   .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.in{ opacity:1; transform:none; }
 
-  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible{
-    outline:3px solid var(--gold); outline-offset:2px; border-radius:6px;
-  }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible{ outline:3px solid var(--azure); outline-offset:2px; border-radius:6px; }
 
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
@@ -368,7 +266,7 @@
 
 <!-- ====================== HERO ====================== -->
 <section class="hero">
-  <svg class="contours" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <svg class="ripples" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <path d="M-60 70 C 180 20, 380 110, 880 50"/>
     <path d="M-60 130 C 200 80, 430 170, 880 110"/>
     <path d="M-60 195 C 230 150, 420 235, 880 180"/>
@@ -380,13 +278,31 @@
     <h1 class="reveal">Todos juntos<br>por la <em>UNA</em></h1>
     <p class="hero-lead reveal">Una sola voz estudiantil rumbo a las elecciones a Rectorado 2026 de la Universidad Nacional del Altiplano. Súmate al movimiento que une a todas las escuelas profesionales por una universidad mejor.</p>
     <div class="hero-cta reveal">
-      <a href="#inscripcion" class="btn btn-gold">Quiero inscribirme</a>
+      <a href="#inscripcion" class="btn btn-primary">Quiero inscribirme</a>
       <a href="#propuestas" class="btn btn-ghost">Ver nuestras propuestas</a>
     </div>
 
-    <!-- BANNER: reemplaza el src por tu imagen, ej. images/banner.jpg -->
-    <div class="hero-banner reveal">
-      <img src="images/banner.jpg" alt="Movimiento Todos juntos por la UNA">
+    <!-- ======= CARRUSEL =======
+         Pon tus imágenes en la carpeta images/ con estos nombres
+         (o cambia los src). Si falta alguna, se muestra un fondo azul. -->
+    <div class="carousel reveal" id="carousel">
+      <div class="carousel-track" id="carTrack">
+        <div class="slide">
+          <img src="images/carrusel-1.jpg" alt="">
+          <span class="slide-cap">Estudiantes unidos por la UNA</span>
+        </div>
+        <div class="slide">
+          <img src="images/carrusel-2.jpg" alt="">
+          <span class="slide-cap">Por una universidad con futuro</span>
+        </div>
+        <div class="slide">
+          <img src="images/carrusel-3.jpg" alt="">
+          <span class="slide-cap">Tu voz cuenta · Elecciones 2026</span>
+        </div>
+      </div>
+      <button class="car-arrow prev" id="carPrev" aria-label="Imagen anterior">&#8249;</button>
+      <button class="car-arrow next" id="carNext" aria-label="Imagen siguiente">&#8250;</button>
+      <div class="car-dots" id="carDots" role="tablist" aria-label="Imágenes"></div>
     </div>
   </div>
 </section>
@@ -398,7 +314,6 @@
     <!-- EDITA este texto con el mensaje real del movimiento -->
     <p class="lede reveal">Creemos en una <strong>UNA que escuche a sus estudiantes</strong>, defienda la calidad académica y abra sus puertas a la investigación y la innovación.</p>
     <p class="prose reveal">«Todos juntos por la UNA» nace para representar a cada escuela profesional con propuestas serias, gestión transparente y trabajo cercano. Este 2026 decidimos el rumbo de nuestra universidad — hagámoslo juntos.</p>
-
     <!-- IMAGEN opcional (equipo, campus, actividad): ej. images/equipo.jpg -->
     <img src="images/equipo.jpg" alt="" class="propose-img reveal">
   </div>
@@ -409,7 +324,6 @@
   <div class="shell">
     <p class="sec-eyebrow reveal">Nuestros ejes</p>
     <p class="lede reveal">Cuatro compromisos que guían nuestro trabajo por la universidad.</p>
-
     <!-- EDITA libremente cada eje con tus propuestas reales -->
     <div class="pillars">
       <article class="pillar reveal">
@@ -444,7 +358,7 @@
       <div class="signup-head">
         <p class="sec-eyebrow reveal" style="justify-content:center;">Súmate al movimiento</p>
         <h2 class="reveal">Inscríbete en dos pasos</h2>
-        <p class="prose reveal">Únete a nuestro grupo de WhatsApp y completa tu registro. No podrás inscribirte sin antes unirte al grupo.</p>
+        <p class="prose reveal">Únete a nuestro grupo de WhatsApp y completa tu registro. Unirte al grupo es obligatorio: sin ese paso no podrás inscribirte.</p>
 
         <ul class="perks reveal">
           <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Recibe información oficial y avisos del movimiento.</li>
@@ -456,31 +370,38 @@
       <div class="path reveal" id="progressPath">
         <div class="path-fill"></div>
 
-        <!-- PASO 1: WhatsApp -->
+        <!-- PASO 1: WhatsApp (abre el modal en la misma ventana) -->
         <div class="gate active" id="gateWA">
           <div class="gate-dot">
             <span class="num">1</span>
             <svg class="check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div class="card-step">
-            <!-- IMAGEN ilustrativa: reemplaza el src, ej. images/whatsapp-paso.jpg -->
-            <img src="images/whatsapp-paso.jpg" alt="" class="card-img">
             <h2>Únete al grupo de WhatsApp</h2>
-            <p class="desc">Ahí compartimos avisos, actividades y novedades del movimiento. Haz clic, únete al grupo y vuelve a esta página.</p>
-            <!-- ENLACE DEL GRUPO: reemplaza el href por el de tu grupo real -->
-            <a href="https://chat.whatsapp.com/EJEMPLO_REEMPLAZAR_ESTE_ENLACE" target="_blank" rel="noopener" class="btn-wa" id="joinBtn">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.86 8.86 0 0 0 12.05 4c-4.78 0-8.66 3.88-8.66 8.66 0 1.55.41 3.04 1.18 4.35L3.6 21.5l4.62-1.5a8.62 8.62 0 0 0 3.83.92h.01c4.78 0 8.66-3.88 8.66-8.66 0-2.32-.9-4.5-2.12-6.94zm-5.55 13.3h-.01a7.2 7.2 0 0 1-3.67-1l-.26-.16-2.73.88.89-2.66-.17-.27a7.18 7.18 0 0 1-1.1-3.85c0-3.98 3.24-7.22 7.23-7.22 1.93 0 3.74.75 5.1 2.12a7.18 7.18 0 0 1 2.12 5.11c0 3.98-3.24 7.22-7.4 7.05zm3.96-5.42c-.22-.11-1.29-.64-1.49-.71-.2-.07-.34-.11-.49.11-.15.22-.56.71-.69.85-.13.15-.25.16-.47.05-.22-.11-.93-.34-1.77-1.09-.65-.58-1.09-1.3-1.22-1.52-.13-.22-.01-.34.1-.45.1-.11.22-.27.34-.4.11-.13.15-.22.22-.37.07-.15.04-.27-.02-.38-.07-.11-.6-1.44-.82-1.97-.22-.53-.44-.46-.6-.46-.16-.01-.34-.01-.52-.01-.18 0-.47.07-.71.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.65 1.12 2.84.13.18 1.83 2.8 4.46 3.81 2.63 1 2.63.67 3.1.63.47-.04 1.52-.62 1.74-1.22.22-.6.22-1.11.15-1.22-.07-.11-.25-.18-.47-.29z"/></svg>
-              Unirme al grupo de WhatsApp
-            </a>
-            <div class="confirm">
-              <input type="checkbox" id="confirmJoined">
-              <label for="confirmJoined">Ya me uní al grupo y quiero continuar con mi inscripción.</label>
+            <p class="desc">Ahí compartimos avisos, actividades y novedades del movimiento. Es obligatorio para poder registrarte.</p>
+
+            <div id="step1Action">
+              <button type="button" class="btn-wa" id="openModalBtn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.86 8.86 0 0 0 12.05 4c-4.78 0-8.66 3.88-8.66 8.66 0 1.55.41 3.04 1.18 4.35L3.6 21.5l4.62-1.5a8.62 8.62 0 0 0 3.83.92h.01c4.78 0 8.66-3.88 8.66-8.66 0-2.32-.9-4.5-2.12-6.94zm-5.55 13.3h-.01a7.2 7.2 0 0 1-3.67-1l-.26-.16-2.73.88.89-2.66-.17-.27a7.18 7.18 0 0 1-1.1-3.85c0-3.98 3.24-7.22 7.23-7.22 1.93 0 3.74.75 5.1 2.12a7.18 7.18 0 0 1 2.12 5.11c0 3.98-3.24 7.22-7.4 7.05zm3.96-5.42c-.22-.11-1.29-.64-1.49-.71-.2-.07-.34-.11-.49.11-.15.22-.56.71-.69.85-.13.15-.25.16-.47.05-.22-.11-.93-.34-1.77-1.09-.65-.58-1.09-1.3-1.22-1.52-.13-.22-.01-.34.1-.45.1-.11.22-.27.34-.4.11-.13.15-.22.22-.37.07-.15.04-.27-.02-.38-.07-.11-.6-1.44-.82-1.97-.22-.53-.44-.46-.6-.46-.16-.01-.34-.01-.52-.01-.18 0-.47.07-.71.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.65 1.12 2.84.13.18 1.83 2.8 4.46 3.81 2.63 1 2.63.67 3.1.63.47-.04 1.52-.62 1.74-1.22.22-.6.22-1.11.15-1.22-.07-.11-.25-.18-.47-.29z"/></svg>
+                Unirme al grupo de WhatsApp
+              </button>
+              <p class="mini-note">
+                <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 1 1 8 0v4"/></svg>
+                Obligatorio para desbloquear el registro.
+              </p>
             </div>
-            <p class="hint" id="hintNeedsClick">Primero haz clic en el botón de arriba para abrir el grupo.</p>
+
+            <div id="step1Done" class="joined-note" style="display:none;">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <strong>¡Listo! Te uniste al grupo.</strong><br>
+                <button type="button" class="link-reopen" id="reopenModal">Volver a abrir el grupo</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- PASO 2: Formulario -->
+        <!-- PASO 2: Formulario (bloqueado hasta unirse) -->
         <div class="gate" id="gateForm">
           <div class="gate-dot">
             <span class="num">2</span>
@@ -489,7 +410,7 @@
           <div class="card-step" id="formGate">
             <div class="lock-banner">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 1 1 8 0v4"/></svg>
-              Se desbloquea al confirmar el paso 1
+              Se desbloquea cuando te unas al grupo de WhatsApp
             </div>
             <h2>Completa tu inscripción</h2>
             <p class="desc">Tus datos nos ayudan a organizar el movimiento por escuelas profesionales. Solo toma un minuto.</p>
@@ -573,24 +494,6 @@
                 </select>
               </div>
 
-              <div class="field">
-                <label class="lbl" for="semestre">Semestre</label>
-                <select id="semestre" name="semestre" required>
-                  <option value="" disabled selected>Selecciona tu semestre…</option>
-                  <option>I semestre</option>
-                  <option>II semestre</option>
-                  <option>III semestre</option>
-                  <option>IV semestre</option>
-                  <option>V semestre</option>
-                  <option>VI semestre</option>
-                  <option>VII semestre</option>
-                  <option>VIII semestre</option>
-                  <option>IX semestre</option>
-                  <option>X semestre</option>
-                  <option>Egresado(a)</option>
-                </select>
-              </div>
-
               <button type="submit" class="submit-btn" id="submitBtn">Sumarme al movimiento</button>
               <p class="privacy">Tus datos se usarán únicamente para la organización interna del movimiento estudiantil.</p>
               <p class="status" id="statusMsg"></p>
@@ -617,14 +520,12 @@
   <div class="footer-inner">
     <h3>Todos juntos por la <span>UNA</span></h3>
     <p class="f-sub">Movimiento estudiantil · Elecciones a Rectorado 2026</p>
-
-    <!-- REDES (opcional): reemplaza los href; o borra los que no uses -->
+    <!-- REDES (opcional): reemplaza los href o borra los que no uses -->
     <div class="footer-social">
       <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 9h3l.5-3H14V4.5c0-.8.3-1.5 1.6-1.5H18V.2C17.6.1 16.4 0 15.1 0 12.3 0 10.5 1.7 10.5 4.8V6H8v3h2.5v9H14V9z"/></svg></a>
       <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 3.3.15 4.8 1.7 5 5 .06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.15 3.3-1.7 4.8-5 5-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-3.3-.15-4.8-1.7-5-5C2.04 15.6 2 15.2 2 12s0-3.6.07-4.9c.15-3.3 1.7-4.8 5-5C8.4 2.2 8.8 2.2 12 2.2zm0 4.9A4.9 4.9 0 1 0 16.9 12 4.9 4.9 0 0 0 12 7.1zm0 8.07A3.17 3.17 0 1 1 15.2 12 3.17 3.17 0 0 1 12 15.17zM17.2 5.6a1.15 1.15 0 1 0 1.15 1.15A1.15 1.15 0 0 0 17.2 5.6z"/></svg></a>
       <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.5 3c.3 2.1 1.5 3.4 3.5 3.6v2.4c-1.2.1-2.3-.2-3.5-.9v5.9c0 4-3.3 6.5-6.8 5.6-2.6-.7-3.9-3.4-3.2-6 .6-2.2 2.7-3.7 5-3.4v2.5c-.4-.1-.9-.1-1.3 0-1.1.3-1.8 1.3-1.6 2.4.2 1.2 1.4 1.9 2.6 1.6 1-.3 1.6-1.2 1.6-2.4V3h2.2z"/></svg></a>
     </div>
-
     <p class="fine">
       Universidad Nacional del Altiplano de Puno · Puno, Perú.<br>
       Iniciativa estudiantil. Esta página es de carácter informativo y de registro de simpatizantes del movimiento.
@@ -632,73 +533,191 @@
   </div>
 </footer>
 
+<!-- ====================== MODAL DE WHATSAPP ====================== -->
+<div class="modal-backdrop" id="waModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="waModalTitle">
+    <button class="modal-close" id="waClose" aria-label="Cerrar">&times;</button>
+    <div class="modal-ic">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A8.86 8.86 0 0 0 12.05 4c-4.78 0-8.66 3.88-8.66 8.66 0 1.55.41 3.04 1.18 4.35L3.6 21.5l4.62-1.5a8.62 8.62 0 0 0 3.83.92h.01c4.78 0 8.66-3.88 8.66-8.66 0-2.32-.9-4.5-2.12-6.94zm-5.55 13.3h-.01a7.2 7.2 0 0 1-3.67-1l-.26-.16-2.73.88.89-2.66-.17-.27a7.18 7.18 0 0 1-1.1-3.85c0-3.98 3.24-7.22 7.23-7.22 1.93 0 3.74.75 5.1 2.12a7.18 7.18 0 0 1 2.12 5.11c0 3.98-3.24 7.22-7.4 7.05zm3.96-5.42c-.22-.11-1.29-.64-1.49-.71-.2-.07-.34-.11-.49.11-.15.22-.56.71-.69.85-.13.15-.25.16-.47.05-.22-.11-.93-.34-1.77-1.09-.65-.58-1.09-1.3-1.22-1.52-.13-.22-.01-.34.1-.45.1-.11.22-.27.34-.4.11-.13.15-.22.22-.37.07-.15.04-.27-.02-.38-.07-.11-.6-1.44-.82-1.97-.22-.53-.44-.46-.6-.46-.16-.01-.34-.01-.52-.01-.18 0-.47.07-.71.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.65 1.12 2.84.13.18 1.83 2.8 4.46 3.81 2.63 1 2.63.67 3.1.63.47-.04 1.52-.62 1.74-1.22.22-.6.22-1.11.15-1.22-.07-.11-.25-.18-.47-.29z"/></svg>
+    </div>
+    <h3 id="waModalTitle">Únete al grupo de WhatsApp</h3>
+    <p>Es obligatorio para registrarte. Abre el grupo, toca «Unirse» dentro de WhatsApp y vuelve a esta ventana para continuar.</p>
+
+    <!-- ENLACE DEL GRUPO: reemplaza el href por el de tu grupo real de WhatsApp -->
+    <a class="btn-wa" id="openWaLink" href="https://chat.whatsapp.com/EJEMPLO_REEMPLAZAR_ESTE_ENLACE" target="_blank" rel="noopener" style="width:100%; margin-bottom:6px;">
+      Abrir grupo de WhatsApp
+    </a>
+
+    <div class="modal-confirm">
+      <p class="mc-q">¿Ya te uniste al grupo?</p>
+      <button class="btn-azure" id="confirmJoinBtn" disabled>Primero abre el grupo</button>
+      <p class="mc-note">Solo podrás registrarte si te uniste al grupo de WhatsApp.</p>
+    </div>
+  </div>
+</div>
+
 <script>
   /* =========================================================
-     CONFIGURACIÓN  (lo único que normalmente cambias)
-     1) Enlace del grupo de WhatsApp  → en el <a id="joinBtn" href="...">
-     2) URL de tu Google Apps Script  → SCRIPT_URL (abajo)
+     CONFIGURACIÓN (lo único que normalmente cambias)
+     1) Enlace del grupo de WhatsApp → busca el enlace openWaLink más arriba en el HTML
+     2) URL de tu Google Apps Script → SCRIPT_URL (abajo)
      ========================================================= */
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyhFf9r-bOpKI3aNV2yT6djuyXVog1RYi7kwTQuB8ZAQbY9LoyMts9zrkntU_PxacH80A/exec";
+  const SEGUNDOS_ESPERA = 6;  // tiempo mínimo tras abrir el grupo antes de poder confirmar
   /* ========================================================= */
 
-  const joinBtn       = document.getElementById('joinBtn');
-  const confirmJoined = document.getElementById('confirmJoined');
-  const formGate      = document.getElementById('formGate');
-  const gateWA        = document.getElementById('gateWA');
-  const gateForm      = document.getElementById('gateForm');
-  const progressPath  = document.getElementById('progressPath');
-  const hintNeedsClick= document.getElementById('hintNeedsClick');
-  const regForm       = document.getElementById('regForm');
-  const submitBtn     = document.getElementById('submitBtn');
-  const statusMsg     = document.getElementById('statusMsg');
-  const successScreen = document.getElementById('successScreen');
-  const mainFlow      = document.getElementById('mainFlow');
-
-  let hasClickedJoin = false;
-
-  /* Si una imagen no se encuentra, se oculta en vez de mostrar el ícono roto */
+  /* Ocultar imágenes que no se encuentren (en vez de mostrar el ícono roto) */
   document.querySelectorAll('img').forEach(img => {
     img.addEventListener('error', () => { img.style.display = 'none'; });
     if (img.complete && img.naturalWidth === 0) img.style.display = 'none';
   });
 
-  /* Paso 1: registrar el clic al grupo */
-  joinBtn.addEventListener('click', () => {
-    hasClickedJoin = true;
-    hintNeedsClick.classList.remove('show');
-  });
+  /* ---------- CARRUSEL ---------- */
+  (function(){
+    const track = document.getElementById('carTrack');
+    if(!track) return;
+    const slides = Array.from(track.children);
+    const dotsWrap = document.getElementById('carDots');
+    const car = document.getElementById('carousel');
+    let i = 0, timer = null;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Confirmación → desbloquea el paso 2 */
-  confirmJoined.addEventListener('change', () => {
-    if (confirmJoined.checked && !hasClickedJoin) {
-      confirmJoined.checked = false;
-      hintNeedsClick.classList.add('show');
-      return;
+    slides.forEach((s, idx) => {
+      const d = document.createElement('button');
+      d.className = 'car-dot' + (idx === 0 ? ' on' : '');
+      d.setAttribute('aria-label', 'Imagen ' + (idx + 1));
+      d.addEventListener('click', () => go(idx, true));
+      dotsWrap.appendChild(d);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function go(n, user){
+      i = (n + slides.length) % slides.length;
+      track.style.transform = 'translateX(' + (-i * 100) + '%)';
+      dots.forEach((d, k) => d.classList.toggle('on', k === i));
+      if(user) restart();
     }
-    if (confirmJoined.checked) {
-      formGate.classList.add('unlocked');
-      gateWA.classList.add('done');
-      gateForm.classList.add('active');
-      progressPath.classList.add('step2');
-      gateForm.scrollIntoView({ behavior:'smooth', block:'center' });
+    function start(){ if(reduce || slides.length < 2) return; timer = setInterval(() => go(i + 1), 5000); }
+    function stop(){ clearInterval(timer); }
+    function restart(){ stop(); start(); }
+
+    document.getElementById('carPrev').addEventListener('click', () => go(i - 1, true));
+    document.getElementById('carNext').addEventListener('click', () => go(i + 1, true));
+    car.addEventListener('mouseenter', stop);
+    car.addEventListener('mouseleave', start);
+    car.addEventListener('focusin', stop);
+    car.addEventListener('focusout', start);
+
+    let sx = 0;
+    track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; stop(); }, {passive:true});
+    track.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - sx;
+      if(Math.abs(dx) > 40){ dx < 0 ? go(i + 1, true) : go(i - 1, true); } else { start(); }
+    }, {passive:true});
+
+    start();
+  })();
+
+  /* ---------- FLUJO WHATSAPP (modal en la misma ventana) + REGISTRO ---------- */
+  const openModalBtn = document.getElementById('openModalBtn');
+  const reopenModal   = document.getElementById('reopenModal');
+  const modal         = document.getElementById('waModal');
+  const waClose       = document.getElementById('waClose');
+  const openWaLink    = document.getElementById('openWaLink');
+  const confirmJoinBtn= document.getElementById('confirmJoinBtn');
+
+  const step1Action = document.getElementById('step1Action');
+  const step1Done   = document.getElementById('step1Done');
+  const gateWA      = document.getElementById('gateWA');
+  const gateForm    = document.getElementById('gateForm');
+  const formGate    = document.getElementById('formGate');
+  const progressPath= document.getElementById('progressPath');
+
+  const regForm   = document.getElementById('regForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const statusMsg = document.getElementById('statusMsg');
+  const successScreen = document.getElementById('successScreen');
+  const mainFlow  = document.getElementById('mainFlow');
+
+  let joined = false;        // se unió y confirmó
+  let opened = false;        // abrió el grupo de WhatsApp
+  let countdownDone = false; // pasó el tiempo de espera
+  let cdTimer = null;
+  let lastFocus = null;
+
+  function refreshConfirm(){
+    if(!opened){
+      confirmJoinBtn.disabled = true;
+      confirmJoinBtn.textContent = 'Primero abre el grupo';
+    } else if(!countdownDone){
+      confirmJoinBtn.disabled = true; /* el texto lo controla el contador */
     } else {
-      formGate.classList.remove('unlocked');
-      gateWA.classList.remove('done');
-      gateForm.classList.remove('active');
-      progressPath.classList.remove('step2');
+      confirmJoinBtn.disabled = false;
+      confirmJoinBtn.textContent = 'Ya me uní — continuar';
     }
+  }
+  function startCountdown(){
+    let t = SEGUNDOS_ESPERA;
+    countdownDone = false;
+    confirmJoinBtn.disabled = true;
+    confirmJoinBtn.textContent = 'Espera ' + t + ' s…';
+    clearInterval(cdTimer);
+    cdTimer = setInterval(() => {
+      t--;
+      if(t <= 0){ clearInterval(cdTimer); countdownDone = true; refreshConfirm(); }
+      else { confirmJoinBtn.textContent = 'Espera ' + t + ' s…'; }
+    }, 1000);
+  }
+  function openModal(){
+    lastFocus = document.activeElement;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    refreshConfirm();
+    setTimeout(() => { (opened && countdownDone ? confirmJoinBtn : openWaLink).focus(); }, 40);
+  }
+  function closeModal(){
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    if(lastFocus) lastFocus.focus();
+  }
+  function markJoined(){
+    joined = true;
+    gateWA.classList.add('done');
+    gateForm.classList.add('active');
+    formGate.classList.add('unlocked');
+    progressPath.classList.add('step2');
+    step1Action.style.display = 'none';
+    step1Done.style.display = 'flex';
+    gateForm.scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+
+  openModalBtn.addEventListener('click', openModal);
+  reopenModal.addEventListener('click', openModal);
+  waClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape' && !modal.hidden) closeModal(); });
+
+  openWaLink.addEventListener('click', () => {
+    opened = true;
+    if(!countdownDone) startCountdown();
+  });
+  confirmJoinBtn.addEventListener('click', () => {
+    if(confirmJoinBtn.disabled) return;
+    markJoined();
+    closeModal();
   });
 
   /* Envío del formulario */
   regForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    if (!confirmJoined.checked) {
-      statusMsg.textContent = "Primero confirma que te uniste al grupo de WhatsApp.";
+    if(!joined){
+      statusMsg.textContent = "Primero únete al grupo de WhatsApp para poder registrarte.";
       statusMsg.className = "status show err";
+      openModal();
       return;
     }
-    if (!regForm.checkValidity()) {
+    if(!regForm.checkValidity()){
       statusMsg.textContent = "Completa todos los campos para continuar.";
       statusMsg.className = "status show err";
       regForm.reportValidity();
@@ -710,7 +729,6 @@
       codigo:           document.getElementById('codigo').value.trim(),
       telefono:         document.getElementById('telefono').value.trim(),
       carrera:          document.getElementById('carrera').value,
-      semestre:         document.getElementById('semestre').value,
       confirmoWhatsapp: "Sí",
       fecha:            new Date().toLocaleString('es-PE')
     };
@@ -721,23 +739,20 @@
     statusMsg.textContent = "Enviando tu inscripción…";
 
     try {
-      if (!SCRIPT_URL || SCRIPT_URL.includes("PEGA_AQUI")) {
+      if(!SCRIPT_URL || SCRIPT_URL.includes("PEGA_AQUI")){
         throw new Error("NO_SCRIPT_CONFIGURED");
       }
-
       await fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "text/plain" },
         body: JSON.stringify(data)
       });
-
       mainFlow.style.display = "none";
       successScreen.classList.add('show');
       successScreen.scrollIntoView({ behavior:'smooth', block:'center' });
-
     } catch (err) {
-      if (err.message === "NO_SCRIPT_CONFIGURED") {
+      if(err.message === "NO_SCRIPT_CONFIGURED"){
         statusMsg.textContent = "Falta conectar Google Sheets: configura SCRIPT_URL en el código.";
       } else {
         statusMsg.textContent = "Hubo un problema al enviar. Inténtalo nuevamente.";
@@ -748,24 +763,18 @@
     }
   });
 
-  /* Animaciones de aparición al hacer scroll */
+  /* ---------- Animaciones de aparición ---------- */
   (function(){
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const items = document.querySelectorAll('.reveal');
-    if (reduce || !('IntersectionObserver' in window)) {
+    if(reduce || !('IntersectionObserver' in window)){
       items.forEach(el => el.classList.add('in'));
       return;
     }
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(en => {
-        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-      });
+      entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
     }, { threshold: 0.12 });
-
-    // Entrada escalonada del hero
-    const hero = document.querySelectorAll('.hero .reveal');
-    hero.forEach((el, i) => { el.style.transitionDelay = (i * 90) + 'ms'; });
-
+    document.querySelectorAll('.hero .reveal').forEach((el, idx) => { el.style.transitionDelay = (idx * 90) + 'ms'; });
     items.forEach(el => io.observe(el));
   })();
 </script>
